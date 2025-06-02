@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ portfolio.name }}'s Portfolio</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        h3 {
+            color: #7f8c8d;
+            font-size: 20px;
+            font-weight: normal;
+        }
+        .skill {
+            display: inline-block;
+            background: #f7f9fa;
+            padding: 5px 15px;
+            margin: 5px;
+            border-radius: 15px;
+            font-size: 14px;
+        }
+        .item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        .contact-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>{{ portfolio.name }}</h1>
+            <h3>{{ portfolio.title }}</h3>
+        </div>
+
+        <div class="section">
+            <h2>About Me</h2>
+            <p>{{ portfolio.about }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div>
+                {% for skill in portfolio.skills %}
+                    <span class="skill">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            {% for exp in portfolio.experience %}
+                <div class="item">{{ exp }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            {% for edu in portfolio.education %}
+                <div class="item">{{ edu }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h2>Projects</h2>
+            {% for project in portfolio.projects %}
+                <div class="item">{{ project }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <p><strong>Email:</strong> {{ portfolio.contact.email }}</p>
+                {% if portfolio.contact.phone %}
+                    <p><strong>Phone:</strong> {{ portfolio.contact.phone }}</p>
+                {% endif %}
+                {% if portfolio.contact.linkedin %}
+                    <p><strong>LinkedIn:</strong> {{ portfolio.contact.linkedin }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

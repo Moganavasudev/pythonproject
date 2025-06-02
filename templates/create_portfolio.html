@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Create Portfolio{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-section { margin-bottom: 2rem; }
+    .dynamic-field { margin-bottom: 1rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Create Your Portfolio</h2>
+    <form method="POST" action="{{ url_for('create_portfolio') }}">
+        <div class="form-section">
+            <h4>Personal Information</h4>
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Professional Title</label>
+                <input type="text" class="form-control" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">About Me</label>
+                <textarea class="form-control" name="about" rows="4" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h4>Skills</h4>
+            <div id="skills-container">
+                <div class="dynamic-field">
+                    <input type="text" class="form-control" name="skills" placeholder="Enter a skill">
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addField('skills')">Add Skill</button>
+        </div>
+
+        <div class="form-section">
+            <h4>Experience</h4>
+            <div id="experience-container">
+                <div class="dynamic-field">
+                    <input type="text" class="form-control" name="experience" placeholder="Company - Position - Duration">
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addField('experience')">Add Experience</button>
+        </div>
+
+        <div class="form-section">
+            <h4>Education</h4>
+            <div id="education-container">
+                <div class="dynamic-field">
+                    <input type="text" class="form-control" name="education" placeholder="Institution - Degree - Year">
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addField('education')">Add Education</button>
+        </div>
+
+        <div class="form-section">
+            <h4>Projects</h4>
+            <div id="projects-container">
+                <div class="dynamic-field">
+                    <input type="text" class="form-control" name="projects" placeholder="Project Name - Description">
+                </div>
+            </div>
+            <button type="button" class="btn btn-secondary" onclick="addField('projects')">Add Project</button>
+        </div>
+
+        <div class="form-section">
+            <h4>Contact Information</h4>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="contact_email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="tel" class="form-control" name="contact_phone">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">LinkedIn Profile</label>
+                <input type="url" class="form-control" name="linkedin">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Portfolio</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function addField(containerType) {
+        const container = document.getElementById(`${containerType}-container`);
+        const newField = document.createElement('div');
+        newField.className = 'dynamic-field';
+        newField.innerHTML = `
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="${containerType}">
+                <button type="button" class="btn btn-danger" onclick="removeField(this)">Remove</button>
+            </div>
+        `;
+        container.appendChild(newField);
+    }
+
+    function removeField(button) {
+        button.parentElement.parentElement.remove();
+    }
+</script>
+{% endblock %} 

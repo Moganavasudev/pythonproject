@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Portfolio Builder{% endblock %}
+
+{% block extra_css %}
+<style>
+    .register-container {
+        max-width: 400px;
+        margin: 100px auto;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    .form-title {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #2c3e50;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="register-container">
+        <h2 class="form-title">Create Account</h2>
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+            <div class="text-center mt-3">
+                <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Password confirmation validation
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const password = document.getElementById('password');
+        const confirm = document.getElementById('confirm_password');
+        
+        if (password.value !== confirm.value) {
+            e.preventDefault();
+            alert('Passwords do not match!');
+        }
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Portfolio Builder{% endblock %}
+
+{% block extra_css %}
+<style>
+    .action-card {
+        transition: transform 0.3s;
+        margin: 20px 0;
+    }
+    .action-card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Welcome to Portfolio Builder</h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card action-card">
+                <div class="card-body text-center">
+                    <h3 class="card-title">Create Portfolio</h3>
+                    <p class="card-text">Build your professional portfolio from scratch</p>
+                    <a href="{{ url_for('create_portfolio') }}" class="btn btn-primary">Create Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card action-card">
+                <div class="card-body text-center">
+                    <h3 class="card-title">View Portfolios</h3>
+                    <p class="card-text">View and manage your existing portfolios</p>
+                    <a href="{{ url_for('view_portfolios') }}" class="btn btn-secondary">View Portfolios</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
